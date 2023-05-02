@@ -16,9 +16,9 @@ function adminContent()
     <i class='fa fa-user'></i>
     <p>Quản lý khách hàng</p>
     </a>";
-    echo "<a class='admin-menu--item' href='../../admin/danh-muc'>
+    echo "<a class='admin-menu--item' href='../../admin/loai-sp'>
     <i class='fa fa-list'></i>
-    <p>Danh mục</p>
+    <p>loại sản phẩm</p>
     </a>";
     echo "<a class='admin-menu--item' href='../../admin/san-pham'>
     <i class='fa fa-coffee'></i>

@@ -126,17 +126,6 @@ customSelect("select", false)
 
 
 
-const baitapBtn = document.querySelectorAll(".exercise-title")
-const baitap = document.querySelectorAll(".exercise-item")
-if(baitapBtn)
-{
-    baitapBtn.forEach((item, index)=>{
-        item.addEventListener("click", ()=>{
-            baitap[index].classList.toggle("active")
-        })
-    })
-    
-}
 
 const inputCount = document.querySelector(".input-count.only")
 if(inputCount)

@@ -115,10 +115,10 @@ function adminContent(){
         </td>
     </tr>
     <tr>
-        <td>Danh mục sản phẩm: </td>
+        <td>loại sản phẩm sản phẩm: </td>
         <td colspan="3">
             <select name="dmSP" id="" class="product-update-input">
-                <option value="">-Chọn danh mục-</option>
+                <option value="">-Chọn loại sản phẩm-</option>
                 <?php
                 include("../../block/connection.php");
                     $sqlSelect= "SELECT ma_dm, ten_dm FROM danh_muc";

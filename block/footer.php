@@ -47,7 +47,7 @@
   <div class="bottom-details" style="background: #000">
     <div class="bottom_text">
       <span class="copyright_text"
-        >Copyright © 2023 bản quyền thuộc về nhóm 5 lớp 62.CNTT-3
+        >Copyright © 2023 bản quyền thuộc về Trương Ngọc Tuấn
         <a href="#"></a></span
       >
       <a href="#" class="go-top"

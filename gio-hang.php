@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nhóm 5</title>
+    <title>Tuan</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Ubuntu:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/main.css"/>
     <link rel="icon" type="image/x-icon" href="./assets/images/logo/logo_2.png">
@@ -23,6 +23,14 @@
     $Gia = 0;
     if(isset($_SESSION["gioHang"]))
     {
+        if(isset($_SESSION['id_user']))
+        $idKhach = $_SESSION['id_user'];
+    
+        $queryKhach = "SELECT * FROM khachhang JOIN diachi on diachi.IDKhachHang = khachhang.idKH WHERE khachhang.idKH = $idKhach ";
+        $resulKhach = mysqli_query($conn, $queryKhach);
+        $Khach=mysqli_fetch_assoc($resulKhach);
+
+
         $gioHang = $_SESSION["gioHang"];
         for($i = 0; $i < count($gioHang); $i++)
         {
@@ -85,28 +93,26 @@
     
     if(isset($_POST["dathang"]))
     {
-        date_default_timezone_set("Asia/Ho_Chi_Minh");
-        $id = "HD".date("ymdHis");
-        $ten_kh = $_POST["ten_kh"];
-        $gt = $_POST["gt"];
-        $sodt = $_POST["sdt"];
-        $diachi = $_POST["diachi"];
-        $tgdat = date('Y-m-d H:i:s');
-        if($ten_kh=="" || $sodt=="" || $diachi=="" )
-        {
-            $err = "<p style='font-size: 16px; font-weight: bold; color: red; margin-top: 15px; padding: 0 11px;'> Vui lòng nhập đủ thông tin ... </p>";
-        }
-        else {$err = "";
-            
-        $query = "INSERT INTO `don_hang`(`ma_donhang`, `ten_kh`, `gioi_tinh`, `dia_chi`, `so_dt`, `tg_dat`, `tinh_trang_tt`, `tinh_trang_Giaohang`, `tong_tien`) VALUES ('$id','$ten_kh','$gt','$diachi','$sodt','$tgdat','0','0', '$tong')";
 
+        
+        $queryHDmax = "SELECT MAX(IdHoaDon) FROM hoadon";
+        $resulHDmax = mysqli_query($conn, $queryHDmax);
+        $HDmax=mysqli_fetch_assoc($resulHDmax);
+        $idHDmax = $HDmax['MAX(IdHoaDon)'] +1;
+
+
+     
+        date_default_timezone_set("Asia/Ho_Chi_Minh");
+        $day = date("Y-m-d");
+        $hour = date("H:i:s");
+        $query = "INSERT INTO `hoadon`(`IdHoaDon`, `IdKhachHang`, `IdNV`, `TrangThai`, `NgayDat`, `GioDat`, `TongTien`) VALUES ('$idHDmax','$idKhach','1','1','$day','$hour','$tong')";
         $resultDonHang = mysqli_query($conn, $query);
         $kiemTra = true;
         $gioHang = $_SESSION["gioHang"];
         for($i = 0; $i < count($gioHang); $i++)
         {
             $arr = $gioHang[$i];
-            $query = "INSERT INTO `chi_tiet_don_hang`(`san_pham`, `so_luong`, `don_hang`) VALUES ('$arr[IDSP]','$arr[sl]','$id')";
+            $query = "INSERT INTO `cthoadon`(`IdHoaDon`, `MaSP`, `SoLuong`) VALUES ('$idHDmax','$arr[IDSP]','$arr[sl]')";
             $result = mysqli_query($conn, $query);
             if(!$result)
             {
@@ -119,8 +125,7 @@
             $_SESSION["gioHang"] = [];
             $none ="active";
         }
-        
-    }
+
     }
     session_write_close();
     
@@ -165,7 +170,7 @@
                         </div>
                         <div class='cart-item-info'>
                             <a href='./chi-tiet-san-pham.php?id=$row[IDSP]' class='cart-item--name'>".$row['Ten']."</a>
-                            <p class='cart-item--dm'> <b>Danh mục: </b>".$row['TenLoai']."</p>
+                            <p class='cart-item--dm'> <b>loại sản phẩm: </b>".$row['TenLoai']."</p>
                         </div>
                         <div class='cart-item--amount'>
                             <form action='' method='post'>
@@ -195,16 +200,15 @@
                         if(isset($_SESSION['id_user']))
                         $id = $_SESSION['id_user'];
         $querys= "SELECT * FROM khachhang JOIN taikhoankh on khachhang.idKH = taikhoankh.IdKH JOIN diachi on diachi.IDKhachHang = khachhang.idKH WHERE khachhang.idKH = $id ";
-            $resultss = mysqli_query($conn, $querys);
-            if(mysqli_num_rows($result)!= 0){
-                while($rows = mysqli_fetch_array($resultss))
-                    {
-                        
-                echo "<div style='font-weight: 700;'> <p class='cart-info-desc'>Địa chỉ giao hàng: ".$rows['DiaChi']."</p></div>" ;    
+            // $resultss = mysqli_query($conn, $querys);
+
+              
+            if($Khach != null){
+             
+                echo "<div style='font-weight: 700;'> <p class='cart-info-desc'>Địa chỉ giao hàng mặt định : ".$Khach['DiaChi']."</p></div>" ;    
                 echo "<div style='color: red;'> <p class='cart-info-desc'>* mặt định sử dụng địa chỉ của bạn</p></div>" ;   
                 echo "<div style='color: red;'> <p class='cart-info-desc'>* nếu bạn muốn thay đổi, vui lòng thay đổi địa chỉ ở phần chỉnh sửa thông tin cá nhân</p></div>" ;   
-                    
-            } 
+    
                 }  ob_end_flush();
                      echo"                  
                        </div>

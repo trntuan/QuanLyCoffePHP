@@ -1,0 +1,83 @@
+/* Phần chính */
+.profile {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Tiêu đề */
+  .profile-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #fff;
+    background-color: #0c713d;
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  /* Ảnh */
+  .profile-text img {
+    display: block;
+    max-width: 40%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin: auto;
+  }
+  
+  /* Nội dung */
+  .profile-text {
+    margin: 5px 0;
+    font-size: 1.1em;
+    color: #555;
+    text-align: center;
+    width: 100%;
+    max-width: 400px; /* giới hạn chiều rộng của nội dung */
+  }
+  
+  /* Địa chỉ */
+  .profile-address {
+    font-weight: bold;
+  }
+  
+  /* Định dạng nút */
+  .profile-button {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .btn-info {
+    background-color: #fff;
+    border: 2px solid #0c713d;
+    color: #0c713d;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-info:hover {
+    background-color: #0c713d;
+    color: #fff;
+    border-color: #fff;
+  }
+  
+  /* Media query */
+  @media screen and (min-width: 768px) {
+    .profile-text {
+      max-width: 600px; /* giới hạn chiều rộng cho màn hình rộng hơn */
+    }
+  }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nhóm 5</title>
+    <title>Tuan</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Ubuntu:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/main.css"/>
     <link rel="icon" type="image/x-icon" href="./assets/images/logo/logo_2.png">
@@ -110,7 +110,7 @@ session_start();
             <div class="detail-info">
                 <p class="detail-name"> <?php echo $row["Ten"];?></p>
                 <p class="detail-price"> <b>Giá: </b> <?php echo $row['Gia']."";?> VNĐ</p>
-                <p class="detail-dm"> <b>Danh mục: </b> <?php echo $row["TenLoai"];?></p>
+                <p class="detail-dm"> <b>loại sản phẩm: </b> <?php echo $row["TenLoai"];?></p>
                 <p class="detail-desc"> <b>Mô tả: </b> <?php echo $row["MoTa"];?></p>
                 <div class="detail-count">
                     <p style="font-size: 20px; font-weight: bold;">Chọn số lượng:</p>

@@ -124,7 +124,7 @@ if (isset($_GET["ok"])){
                     <th>Tên sản phẩm</th>
                     <th>Hình ảnh</th>
                     <th>Đơn giá</th>
-                    <th>Danh mục</th>
+                    <th>loại sản phẩm</th>
                     <th>Chức năng</th>
                 </tr>";
                 $dem=0;

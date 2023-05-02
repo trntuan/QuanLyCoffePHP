@@ -57,7 +57,7 @@ function adminContent()
                                         <span class='money'>{$row['gia']}</span> VNĐ
                                         </div>
                                     <div class='product-detail--type'>
-                                        <span style='color: #0C713D; font-weight: bold'>Danh mục: </span>{$row['ten_dm']}</div>
+                                        <span style='color: #0C713D; font-weight: bold'>loại sản phẩm: </span>{$row['ten_dm']}</div>
                                     <div class='product-detail--desc'>
                                         <span style='color: #0C713D; font-weight: bold'>Mô tả: </span> {$row['mo_ta']}</div>
                                 </div>

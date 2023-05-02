@@ -9,8 +9,8 @@ if (isset($_POST["submit"])){
     $result=mysqli_query($conn,$sql);
             if ($result) 
             {
-                header("Location:../../admin/danh-muc/index.php");
-                $notiProduct="Thêm danh mục mới thành công";
+                header("Location:../../admin/loai-sp/index.php");
+                $notiProduct="Thêm loại sản phẩm mới thành công";
                 session_start();
                 $_SESSION["noti-category"]=$notiCategory;
                 session_write_close();
@@ -26,8 +26,8 @@ include("../../block/admin-block.php");
 function adminContent(){
     echo "<div class='container'>";
     echo "<div class='category-content--link' align='left' style='margin-bottom: 30px'>";
-    echo "<h1 class='admin-category--title'>THÊM DANH MỤC MỚI</h1>
-    <a href='../../admin/danh-muc/index.php' class='category-link--edit'>
+    echo "<h1 class='admin-category--title'>THÊM loại sản phẩm MỚI</h1>
+    <a href='../../admin/loai-sp/index.php' class='category-link--edit'>
     <i class='fa-solid fa-arrow-left'></i><span> Quay lại</span>
     </a>
     </div>";
@@ -37,7 +37,7 @@ function adminContent(){
     <table class="category-update--table">
     <tr>
         <td>
-            Mã danh mục: 
+            Mã loại sản phẩm: 
         </td>
         <td colspan="3">
         <input type='text' name='maDM' value="<?php
@@ -46,7 +46,7 @@ function adminContent(){
     </tr>
     <tr>
         <td>
-            Tên danh mục: 
+            Tên loại sản phẩm: 
         </td>
         <td colspan="3">
         <input type='text' name='tenDM' value="<?php

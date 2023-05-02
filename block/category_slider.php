@@ -1,7 +1,7 @@
 <div class="container">
     <div class="categorySlider">
     <div class="category">
-        <h1>Danh mục sản phẩm</h1>
+        <h1>loại sản phẩm sản phẩm</h1>
         
             <div class="select-box" >
                 <div class="options-container active" style="background-color: #0C713D">
@@ -23,7 +23,7 @@
     ?>
             </div>
             <div class="selected" style="background-color: #0C713D">
-                Chọn danh mục
+                Chọn loại sản phẩm
             </div>
         </div>
         

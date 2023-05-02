@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nhóm 5</title>
+    <title>Tuan</title>
     <link rel="stylesheet" href="./assets/css/main.css"/>
     <link
       rel="stylesheet"
@@ -57,7 +57,7 @@
                     </button>
                     <div class="dropdown-menu">
                         <div class="bs-searchbox">
-                            <input type="text" class="form-control" autocomplete="off" placeholder="Tìm danh mục...">
+                            <input type="text" class="form-control" autocomplete="off" placeholder="Tìm loại sản phẩm...">
                         </div>
                         <div class="dropdown-content">
 

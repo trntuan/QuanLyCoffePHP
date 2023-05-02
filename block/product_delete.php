@@ -19,7 +19,7 @@
                     container.insertAdjacentHTML("beforeend", template);
                     }
                     btnDelete.forEach((item, index) => item.addEventListener("click", function(e){
-                        const idProduct = document.querySelectorAll(".id_sp");
+                        const idProduct = document.querySelectorAll(".id_dm");
                         e.preventDefault();
                         var id = idProduct[index].textContent;
                         console.log(id);

@@ -2,6 +2,6 @@
     $serverName = "localhost";
     $userName = "root";
     $passWord = "";
-    $dbName = "cafe_pl";
+    $dbName = "cafe_tuan";
     $conn = mysqli_connect($serverName, $userName, $passWord, $dbName);
 ?>
