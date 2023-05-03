@@ -24,9 +24,10 @@
     if(isset($_SESSION['id_user']))
     $id = $_SESSION['id_user'];
     
-    $queryDM = "SELECT * FROM khachhang JOIN taikhoankh on khachhang.idKH = taikhoankh.IdKH JOIN diachi on diachi.IDKhachHang = khachhang.idKH WHERE khachhang.idKH = $id ";
+    $queryDM = "SELECT * FROM `khachhang` kh JOIN taikhoankh tk on kh.idKH = tk.IdKH WHERE tk.idKH = $id ";
     $result = mysqli_query($conn, $queryDM);
 
+    echo $id;
     if(mysqli_num_rows($result)!= 0){
         while($row = mysqli_fetch_array($result))
             {
@@ -46,7 +47,7 @@
     
               
                 <div class='profile-button'>
-                    <button  class='btn-info btn-blue'><a href=href='./thongtinedit.php?id=".$row['idKH']."'>chỉ sửa</a></button>
+                    <button  class='btn-info btn-blue'><a href='./thongtinedit.php?id=".$row['idKH']."'>chỉ sửa</a></button>
                 </div>
     
             </div>";

@@ -1,12 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Ubuntu:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/main.css"/>
+    <link rel="icon" type="image/x-icon" href="./assets/images/logo/logo_2.png">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+</head>
+<body>
+
 <?php
-include("../../block/connection.php");
 if (isset($_GET["ok"])){
     $id_NV= $_GET['id_NV'];
     echo "$id_NV";
     $sql= "DELETE FROM `nhan_vien` WHERE ma_nv='$id_NV'";
     $result=mysqli_query($conn,$sql);
     if ($result){
-        header("Location: ../../admin/nhan-vien/index.php");
+        header("Location:./thongtin.php");
         $err="Xóa dữ liệu thành công";
         session_start();
         $_SESSION["err"]=$err;
@@ -14,7 +30,7 @@ if (isset($_GET["ok"])){
 }
     else 
     {
-        header("Location: ../../admin/nhan-vien/index.php");
+        header("Location:./thongtin.php");
         $err="Xóa dữ liệu không thành công";
         session_start();
         $_SESSION["err"]=$err;
@@ -23,7 +39,6 @@ if (isset($_GET["ok"])){
 }
 ?>
 <?php
-include("../../block/connection.php");
 if(isset($_POST['submit']))
 {
     $idNV=$_POST['idNV'];  
@@ -60,7 +75,7 @@ if(isset($_POST['submit']))
     $result=mysqli_query($conn,$sql);
             if ($result) 
             {
-                header("Location:../../admin/nhan-vien/index.php");
+                header("Location:./thongtin.php");
                 $notiPeople="Cập nhật thành công";
                 session_start();
                 $_SESSION["noti-people"]=$notiPeople;
@@ -73,31 +88,34 @@ if(isset($_POST['submit']))
     }
 ?>
 <?php
-include("../../block/admin-block.php");
-function adminContent(){
-    echo "<div class='container'>";
-    include("../../block/connection.php");
-    $id=$_GET['id'];
-    $query = "SELECT * FROM nhan_vien WHERE ma_nv='$id'";
+ob_start();
+session_start();
+  include("./block/connection.php");
+  include("./block/global.php");
+  include("./block/header.php");
+
+    if(isset($_SESSION['id_user']))
+    $id = $_SESSION['id_user'];
+    $query = "SELECT * FROM `khachhang` kh JOIN taikhoankh tk on kh.idKH = tk.IdKH WHERE tk.idKH = $id";
     $result = mysqli_query($conn, $query);
     if (!$result){
         echo "<p sstyle='color: red; font-weight: bold'>Không có dữ liệu</p>";
     }
     else {
         while ($row=mysqli_fetch_array($result)){
-            $idNV=$row['ma_nv'];
-            $hoNV=$row['ho_nv'];
-            $tenNV=$row['ten_nv'];
-            $gioitinh=$row['gioi_tinh'];
-            $sdt= $row['sdt'];
-            $diachi=$row['dia_chi'];
-            if ($row['hinh_anh']==null) $hinhAnh="personal.png";
-            else $hinhAnh=$row['hinh_anh'];
+            $idNV=$row['idKH'];
+            $hoNV=$row['HoKH'];
+            $tenNV=$row['TenKH'];
+            $gioitinh=$row['GioiTinh'];
+            $sdt= $row['Sdt'];
+            $diachi=$row['DiaChi'];
+            if ($row['anh']==null) $hinhAnh="user.jpg";
+            else $hinhAnh=$row['anh'];
         }
     }
     echo "<div class='product-content--link' align='left' style='margin-bottom: 30px'>";
-            echo "<h1 class='admin-product--title'>CẬP NHẬT THÔNG TIN NHÂN VIÊN</h1>
-            <a href='../../admin/nhan-vien/index.php' class='product-link--edit'>
+            echo "<h1 class='admin-product--title'>CẬP NHẬT THÔNG TIN KHÁCH HÀNG</h1>
+            <a href='./thongtin.php' class='product-link--edit'>
             <i class='fa-solid fa-arrow-left'></i><span> Quay lại</span>
             </a>
         </div>";
@@ -168,49 +186,12 @@ function adminContent(){
     </table>
 </div>
 <div class='product-link' align='center'>
-    <a href='#modal' class='product-link--delete admin-delete' style="padding: 7px 20px">Xóa</a>
     <input type="submit"  name="submit" value="Lưu thông tin" class="btn-update" style="margin-top: 0; margin:0">
 </div>
 </form>
-<?php
-    echo "</div>";
-}
-?>
+
 <script>
-    const btnDelete = document.querySelectorAll(".admin-delete");
-        const container = document.querySelector(".container");
-        function addModal(){
-            const template =`<form action="" method="get" id="modal">
-            <div class="modal modal-hidden" align='center'> 
-            
-            <input type="hidden" class="id-product" name="id_NV">
-            <i class="fa fa-close modal-content--close"></i>
-                <div class="modal-content">
-                    <div class="modal-content--text">Bạn có muốn xóa nhân viên này?</div>
-                    <div class="modal-content--link">
-                        <a href="" class='modal-content--close'>Hủy</a>
-                        <input name="ok" type="submit" class='modal-content--delete' value="Xóa"></input>
-                    </div>
-                </div>
-            </div>
-            </form>`;
-        container.insertAdjacentHTML("beforeend", template);
-        }
-        btnDelete.forEach((item, index) => item.addEventListener("click", function(e){
-            e.preventDefault();
-            addModal();
-            const idProduct = document.querySelector(".id-people");
-            const idSP= document.querySelector(".id-product");
-            idSP.value = idProduct.value;
-            const modal = document.querySelector(".modal");
-            modal.classList.remove("modal-hidden");
-            modal.classList.add("modal-show");
-            const btnClose = document.querySelectorAll(".modal-content--close");
-            btnClose.forEach((item) => item.addEventListener("click", function(){
-                modal.classList.remove("modal-show");
-                modal.classList.add("modal-hidden");
-            }))
-        }));
+    
     const btnUpdateImg = document.querySelector("#updateImg");
     btnUpdateImg.addEventListener("change", function(){
         const img= document.querySelector("#img");
@@ -218,3 +199,13 @@ function adminContent(){
         img.src=window.URL.createObjectURL(btnUpdateImg.files[0]);
     });
 </script>
+
+<?php
+        include("./block/footer.php");
+        ob_end_flush();
+    ?>
+    
+    <script src="./assets/js/main.js"></script>
+      
+</body>
+</html>

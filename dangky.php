@@ -66,30 +66,54 @@
     //         }
     // }
       session_start();
+      ob_start();
     include("./block/connection.php");
     include("./block/global.php");
     include("./block/header.php");
     $err="";
         if(isset($_POST["submit"]))
         {
-            $tk = $_POST["name"];
-            $mk = $_POST["pass"];
-
-            if(($tk === "admin" || $tk === "admin@gmail.com")  && $mk == "123")
+            $ho = $_POST["ho"];
+            $ten = $_POST["ten"];
+            $email = $_POST["email"];
+            $Pass = $_POST["pass"];
+            $checkPass = $_POST["checkPass"];
+            $gt = $_POST["gt"];
+            if($ho != "" && $ten !="" && $Pass!="" && $checkPass!="" && $gt!="" && $email!="")
             {
-                header("location: ./quan-ly");
-                session_start();
-                    $_SESSION["hasAcc"] = true;
-                session_write_close();
-            }
+                if($Pass === $checkPass)
+                {
+                $queryIdMax = "SELECT MAX(idKH) FROM khachhang";
+                $resulIdMax = mysqli_query($conn, $queryIdMax);
+                $idMax=mysqli_fetch_assoc($resulIdMax);
+                $idKH = $idMax['MAX(idKH)'] +1;
+                $anh = "user.jpg";
+                $sql="INSERT INTO `khachhang`(`idKH`, `TenKH`, `HoKH`, `GioiTinh`,`anh`)  VALUES ('$idKH','$ten','$ho','$gt','$anh')";
+                $result=mysqli_query($conn,$sql);
+                    if ($result) 
+                    {
+                        $sql="INSERT INTO `taikhoankh`(`IdKH`, `Email`, `password`)  VALUES ('$idKH','$email','$Pass')";
+                        $result=mysqli_query($conn,$sql);
+                        if ($result)
+                        { 
+                            $_SESSION['id_user'] = $idKH;
+                           
+                            header("location:./index.php");
+                            
+                         
+                        }
+                    }
+                }
             else {
-                $err="Đăng nhập không thành công, vui lòng nhập lại tài khoản hoặc mật khẩu";
+                $err="vui lòng nhập lại mật khẩu chính xác";
+            }
+            }else {
+                $err="Vui lòng nhập đầy đủ thông tin";
             }
         }
        
         
-        
-        session_write_close();
+        ob_end_flush();
     ?>
     <div class="login-body">
         <div class="login">
@@ -97,39 +121,45 @@
             <div class="login-content">
                 <form action="" method="post">
                 <div class="login-group">
-                        <label class="login-label" aria-autocomplete="none">Nhập tên người dùng *</label>
-                        <input type="text" name="name" class="login-input" value="<?php
-                        if (isset($tk)) echo $tk; else echo "";
+                        <label class="login-label" aria-autocomplete="none">Nhập họ *</label>
+                        <input type="text" name="ho" class="login-input" value="<?php
+                        if (isset($ho)) echo $ho; ;
+                        ?>">
+                    </div>
+                <div class="login-group">
+                        <label class="login-label" aria-autocomplete="none">Nhập tên *</label>
+                        <input type="text" name="ten" class="login-input" value="<?php
+                        if (isset($ten)) echo $ten;;
                         ?>">
                     </div>
                     <div class="login-group">
                         <label class="login-label" aria-autocomplete="none">Nhập email đăng nhập *</label>
-                        <input type="text" name="name" class="login-input" value="<?php
-                        if (isset($tk)) echo $tk; else echo "";
+                        <input type="text" name="email" class="login-input" value="<?php
+                        if (isset($email)) echo $email; else echo "";
                         ?>">
                     </div>
                     <div class="login-group">
                         <label class="login-label">Mật khẩu *</label>
                         <input type="password" name="pass" class="login-input" value="<?php
-                        if (isset($mk)) echo $mk; else echo "";
+                        if (isset($mk)) echo $Pass; else echo "";
                         ?>">
                     </div>
                     <div class="login-group">
                         <label class="login-label">Nhập lại mật khẩu *</label>
-                        <input type="password" name="pass" class="login-input" value="<?php
-                        if (isset($mk)) echo $mk; else echo "";
+                        <input type="password" name="checkPass" class="login-input" value="<?php
+                        if (isset($checkPass)) echo $checkPass; else echo "";
                         ?>">
                     </div>
                     <div class='form-order--group'>
                         <div class='form-order-radius'>
                             <label for='nam'>
-                                <input type='radio' value ='1' checked name='gt' id='nam'>
+                                <input type='radio' value ='nam' checked name='gt' id='nam'>
                                 <span>Anh</span>
                             </label>
                         </div>
                         <div class='form-order-radius'>
                             <label for='nu'>
-                                <input type='radio' value ='0' name='gt' id='nu'>
+                                <input type='radio' value ='nữ' name='gt' id='nu'>
                                 <span>Chị</span>
                             </label>
                         </div>

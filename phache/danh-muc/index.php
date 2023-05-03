@@ -49,20 +49,20 @@ function adminContent()
         $query = "SELECT * FROM `loaisp` LIMIT $offset, $rowsPerPage";
         $result =  mysqli_query($conn, $query);
     if (!$result){
-        echo "Không có loại sản phẩm nào";
+        echo "Không có danh mục nào";
     }
     else {
         if (!mysqli_num_rows($result)==0){
             echo "<div class='category-content--link' align='left' style='margin-bottom: 30px'>";
-            echo "<h1 class='admin-category--title'>THÔNG TIN loại sản phẩm</h1>
-            <a href='../../admin/loai-sp/create.php' style=' border: 1px solid #0C713D;
-            background-color: #0C713D;'>Thêm loại sản phẩm</a>
+            echo "<h1 class='admin-category--title'>THÔNG TIN DANH MỤC</h1>
+            <a href='../../admin/danh-muc/create.php' style=' border: 1px solid #0C713D;
+            background-color: #0C713D;'>Thêm danh mục</a>
         </div>";
             echo "<table align='center' class='admin-category--table' >";
             echo "<tr >
                     <th>STT</th>
-                    <th>Mã loại sản phẩm</th>
-                    <th>Tên loại sản phẩm</th>
+                    <th>Mã danh mục</th>
+                    <th>Tên danh mục</th>
                     <th>Chức năng</th>
                 </tr>";
                 // $temp=$_GET['page']*$rowsPerPage;
@@ -76,7 +76,7 @@ function adminContent()
                     echo "<td>".$dem."</td>";
                     echo "<td><span class='id_dm'>DD0{$rows['MaLoai']}</span></td>";
                     echo "<td>{$rows['TenLoai']}</td>";
-                    echo "<td align='center'><a href='../../admin/loai-sp/edit.php?id=".$id."'>
+                    echo "<td align='center'><a href='../../admin/danh-muc/edit.php?id=".$id."'>
                         <i class='fa fa-edit' title='Chỉnh sửa'></i> 
                     </a> |
                         <i class='fa fa-trash admin-delete' style='color: red' title='Xóa' ></i> 
@@ -186,7 +186,7 @@ include("../../block/admin-block.php");
             
             <i class="fa fa-close modal-content--close"></i>
                 <div class="modal-content">
-                    <div class="modal-content--text">Bạn có muốn xóa loại sản phẩm này không?</div>
+                    <div class="modal-content--text">Bạn có muốn xóa danh mục này không?</div>
                     <div class="modal-content--link">
                         <input type="submit" name="reset" class='modal-content--close' value="Hủy"></input>
                         <input name="ok" type="submit" class='modal-content--delete' value="Xóa"></input>

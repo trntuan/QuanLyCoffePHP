@@ -7,7 +7,7 @@ if (isset($_POST["submit"])){
     $sql="UPDATE `danh_muc` SET `ten_dm`='$ten_dm' WHERE ma_dm='$id_dm'";
     $result=mysqli_query($conn, $sql);
     if ($result){
-        header("Location:../../admin/loai-sp");
+        header("Location:../../admin/danh-muc");
         session_start();
         $_SESSION["noti"]="Cập nhật thành công";
         session_write_close();
@@ -33,7 +33,7 @@ function adminContent(){
     }
     echo "<div class='container'>";
     echo "<div class='category-content--link' align='left' style='margin-bottom: 30px'>";
-            echo "<h1 class='admin-category--title'>CẬP NHẬT loại sản phẩm</h1>
+            echo "<h1 class='admin-category--title'>CẬP NHẬT DANH MỤC</h1>
             
         </div>";
 ?>
@@ -48,7 +48,7 @@ function adminContent(){
             </td>
         </tr>
         <tr>
-            <td><h3>Tên loại sản phẩm: </h3></td>
+            <td><h3>Tên danh mục: </h3></td>
             <td>
                 <input type="text" name="ten_DM" class="btn-ten" value="<?php 
                 if (isset($ten_DM)) echo $ten_DM; else echo ""?>">
@@ -56,7 +56,7 @@ function adminContent(){
         </tr>
     </table>
     <input type="submit" value="Lưu thông tin" name="submit" class="btn-update">
-    <a href='../../admin/loai-sp/index.php'>
+    <a href='../../admin/danh-muc/index.php'>
         <i class='fa-solid fa-arrow-left'></i><span> Quay lại</span></a> 
 </form>
 <?php

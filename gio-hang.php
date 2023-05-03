@@ -204,12 +204,20 @@
 
               
             if($Khach != null){
-             
+                
+                if($Khach['DiaChi'] != null)
                 echo "<div style='font-weight: 700;'> <p class='cart-info-desc'>Địa chỉ giao hàng mặt định : ".$Khach['DiaChi']."</p></div>" ;    
                 echo "<div style='color: red;'> <p class='cart-info-desc'>* mặt định sử dụng địa chỉ của bạn</p></div>" ;   
                 echo "<div style='color: red;'> <p class='cart-info-desc'>* nếu bạn muốn thay đổi, vui lòng thay đổi địa chỉ ở phần chỉnh sửa thông tin cá nhân</p></div>" ;   
     
-                }  ob_end_flush();
+                }else {
+                    echo "<div style='font-weight: 700;color: red;'> <p >vui lòng nhập địa chỉ giao hàng tại đây *: </p></div>" ; 
+                    echo '<form action="">
+                    <input name="diachi" class="product-update--input" type="text">
+                    </form> ';
+                    
+                }
+                  ob_end_flush();
                      echo"                  
                        </div>
                     </div>

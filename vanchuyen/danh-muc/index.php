@@ -74,7 +74,7 @@ function adminContent()
                     $id=$rows["MaLoai"];
                     echo "<tr>";
                     echo "<td>".$dem."</td>";
-                    echo "<td><span class='id_dm'>DD0{$rows['MaLoai']}</span></td>";
+                    echo "<td><span class='id_sp'>DD0{$rows['MaLoai']}</span></td>";
                     echo "<td>{$rows['TenLoai']}</td>";
                     echo "<td align='center'><a href='../../admin/loai-sp/edit.php?id=".$id."'>
                         <i class='fa fa-edit' title='Chỉnh sửa'></i> 
@@ -197,7 +197,7 @@ include("../../block/admin-block.php");
         container.insertAdjacentHTML("beforeend", template);
         }
         btnDelete.forEach((item, index) => item.addEventListener("click", function(e){
-            const idProduct = document.querySelectorAll(".id_dm");
+            const idProduct = document.querySelectorAll(".id_sp");
             e.preventDefault();
             var id = idProduct[index].textContent;
             console.log(id);
